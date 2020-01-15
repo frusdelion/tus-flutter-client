@@ -1,5 +1,5 @@
 name: tus
-description: Flutter Client for the tus client.
+description: A Flutter plugin to upload files using the tus resumable upload protocol. Uses the official TUSKit on iOS and tus-android-client on Android as the underlying clients.
 version: 0.0.1
 homepage: https://github.com/frusdelion/tus-flutter-client
 
