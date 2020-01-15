@@ -1,3 +1,6 @@
+## 0.0.4
+* Initialize the tus client if it has not already been initialized.
+
 ## 0.0.1
 
 * Initial Release
