@@ -109,7 +109,7 @@ class Tus {
   // Performs a file upload using the tus protocol. Provide a [fileToUpload].
   // Optionally, you can provide [metadata] to enrich the file upload.
   // Note that filename is provided in the [metadata] upon upload.
-  Future<Map<String, Object>> createUploadFromFile(String fileToUpload,
+  Future<dynamic> createUploadFromFile(String fileToUpload,
       {Map<String, String> metadata}) async {
     if(!isInitialized) {
       await initializeWithEndpoint();
