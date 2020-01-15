@@ -5,8 +5,8 @@ A Flutter plugin to upload files using the [tus resumable upload protocol](https
 * [TUSKit](https://github.com/tus/TUSKit) on iOS
 * [tus-android-client](https://github.com/tus/tus-android-client) on Android
 
-## Pull Requests
-Pull requests are always welcome! 
+## Pull Requests and Issues
+Pull requests are always welcome! If you are facing issues, please feel free 
 
 ## Installation
 Add the following to your `pubspec.yml`
@@ -71,3 +71,7 @@ await tusD.createUploadFromFile(
 
 // Get the result from your onComplete callback
 ```
+
+## Future Work
+* [ ] Write tests and code coverage
+* [ ] tus client for the web

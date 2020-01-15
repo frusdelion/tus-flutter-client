@@ -9,17 +9,30 @@ typedef void OnProgressCallback(
     int bytesWritten, int bytesTotal, double progress, Tus tus);
 typedef void OnErrorCallback(String error, Tus tus);
 
+// The Tus Flutter client.
+//
+// Each tus flutter client supports one endpoint url to upload files to.
+// If you need multiple tus upload endpoints, instantiate multiple tus clients.
 class Tus {
   static const MethodChannel _channel =
       const MethodChannel('io.tus.flutter_service');
 
+  // The endpoint url.
   final String endpointUrl;
   OnProgressCallback onProgress;
   OnCompleteCallback onComplete;
   OnErrorCallback onError;
+
+  // Flag to ensure that the tus client is initialized.
   bool isInitialized = false;
+
+  // Headers for client-wide uploads.
   Map<String, String> headers = Map<String, String>();
+
+  // Number of retries before giving up. Defaults to infinite retries.
   int retry = -1;
+
+  // [iOS-only] Allows cellular access for uploads.
   bool allowCellularAccess = true;
 
   Tus(this.endpointUrl,
@@ -32,18 +45,22 @@ class Tus {
     _channel.setMethodCallHandler(this.handler);
   }
 
+  // Handles the method calls from the native side.
   Future<void> handler(MethodCall call) {
+    // Ensure that the endpointUrl provided from the MethodChannel is the same
+    // as the flutter client.
     switch (call.method) {
       case "progressBlock":
       case "resultBlock":
       case "failureBlock":
         if (call.arguments["endpointUrl"] != endpointUrl) {
-          throw Exception(
-              'endpoint url ${call.arguments["endpointUrl"]} not recognised.');
+          // This method call is not meant for this client.
+          return null;
         }
         break;
     }
 
+    // Trigger the onProgress callback if the callback is provided.
     if (call.method == "progressBlock") {
       var bytesWritten = call.arguments["bytesWritten"];
       var bytesTotal = call.arguments["bytesTotal"];
@@ -54,6 +71,7 @@ class Tus {
       }
     }
 
+    // Trigger the onComplete callback if the callback is provided.
     if (call.method == "resultBlock") {
       var resultUrl = call.arguments["resultUrl"];
       if (onComplete != null) {
@@ -61,6 +79,7 @@ class Tus {
       }
     }
 
+    // Triggers the onError callback if the callback is provided.
     if (call.method == "failureBlock") {
       var error = call.arguments["error"] ?? "";
       if (onError != null) {
@@ -74,6 +93,7 @@ class Tus {
     return version;
   }
 
+  // Initialize the tus client on the native.
   Future<Map> initializeWithEndpoint() async {
     var response =
         await _channel.invokeMethod("initWithEndpoint", <String, String>{
@@ -86,10 +106,16 @@ class Tus {
     return response;
   }
 
+  // Performs a file upload using the tus protocol. Provide a [fileToUpload].
+  // Optionally, you can provide [metadata] to enrich the file upload.
+  // Note that filename is provided in the [metadata] upon upload.
   Future<Map<String, Object>> createUploadFromFile(String fileToUpload,
       {Map<String, String> metadata}) async {
-    if(metadata == null) {
-      metadata = Map<String,String>();
+
+    // Ensures that metadata is not null by providing an empty map, if not
+    // provided by the user.
+    if (metadata == null) {
+      metadata = Map<String, String>();
     }
 
     try {
@@ -102,7 +128,7 @@ class Tus {
         "metadata": metadata,
       });
 
-      if(result.containsKey("error")) {
+      if (result.containsKey("error")) {
         throw Exception("${result["error"]} { ${result["reason"]}");
       }
 

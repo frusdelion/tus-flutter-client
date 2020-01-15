@@ -1,3 +1,5 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+* Initial Release
+* Added uploads to tus clients using iOS and Android.
+* TODO: Tests
