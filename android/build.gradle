@@ -1,0 +1,38 @@
+group 'io.tus.flutter.tus'
+version '1.0'
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.0'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 16
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+    dependencies {
+        implementation 'io.tus.java.client:tus-java-client:0.4.2'
+        implementation 'io.tus.android.client:tus-android-client:0.1.9'
+    }
+}

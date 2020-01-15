@@ -1,0 +1,41 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_plugin_android_lifecycle (0.0.1):
+    - Flutter
+  - image_picker (0.0.1):
+    - Flutter
+  - tus (0.0.1):
+    - Flutter
+    - TUSKit
+  - TUSKit (1.4.2)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_plugin_android_lifecycle (from `.symlinks/plugins/flutter_plugin_android_lifecycle/ios`)
+  - image_picker (from `.symlinks/plugins/image_picker/ios`)
+  - tus (from `.symlinks/plugins/tus/ios`)
+
+SPEC REPOS:
+  trunk:
+    - TUSKit
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_plugin_android_lifecycle:
+    :path: ".symlinks/plugins/flutter_plugin_android_lifecycle/ios"
+  image_picker:
+    :path: ".symlinks/plugins/image_picker/ios"
+  tus:
+    :path: ".symlinks/plugins/tus/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_plugin_android_lifecycle: 47de533a02850f070f5696a623995e93eddcdb9b
+  image_picker: e3eacd46b94694dde7cf2705955cece853aa1a8f
+  tus: e68597c1d1b8504d3d1712f7ad034d1ecdf9ca15
+  TUSKit: 4bcc2fe13e1b4d6c3bfbaca57d64e64c1be31201
+
+PODFILE CHECKSUM: 3dbe063e9c90a5d7c9e4e76e70a821b9e2c1d271
+
+COCOAPODS: 1.8.4
