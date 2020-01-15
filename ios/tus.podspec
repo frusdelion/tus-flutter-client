@@ -11,7 +11,7 @@ Tus Flutter Client
                        DESC
   s.homepage         = 'https://github.com/frusdelion/tus-flutter-client'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Lionell Yip' => 'lionell@lionell.me' }
+  s.author           = { 'Lionell Yip' => 'watonly.me@gmail.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
