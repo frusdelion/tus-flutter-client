@@ -1,8 +1,7 @@
 name: tus
 description: Flutter Client for the tus client.
 version: 0.0.1
-author: Lionell Yip
-homepage: https://tus.io/
+homepage: https://github.com/frusdelion/tus-flutter-client
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

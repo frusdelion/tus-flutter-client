@@ -7,9 +7,9 @@ Pod::Spec.new do |s|
   s.version          = '0.0.1'
   s.summary          = 'Flutter Client for tus.io'
   s.description      = <<-DESC
-A new flutter plugin project.
+Tus Flutter Client
                        DESC
-  s.homepage         = 'https://tus.io/'
+  s.homepage         = 'https://github.com/frusdelion/tus-flutter-client'
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Lionell Yip' => 'lionell@lionell.me' }
   s.source           = { :path => '.' }
