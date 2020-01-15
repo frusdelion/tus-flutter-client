@@ -111,6 +111,9 @@ class Tus {
   // Note that filename is provided in the [metadata] upon upload.
   Future<Map<String, Object>> createUploadFromFile(String fileToUpload,
       {Map<String, String> metadata}) async {
+    if(!isInitialized) {
+      await initializeWithEndpoint();
+    }
 
     // Ensures that metadata is not null by providing an empty map, if not
     // provided by the user.
