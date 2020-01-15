@@ -1,5 +1,5 @@
 # tus-flutter-client
-[![Protocol](http://img.shields.io/badge/tus_protocol-v1.0.0-blue.svg?style=flat)](http://tus.io/protocols/resumable-upload.html)
+[![Protocol](https://img.shields.io/badge/tus_protocol-v1.0.0-blue.svg?style=flat)](http://tus.io/protocols/resumable-upload.html)
 
 A Flutter plugin to upload files using the [tus resumable upload protocol](https://tus.io):
 * [TUSKit](https://github.com/tus/TUSKit) on iOS
