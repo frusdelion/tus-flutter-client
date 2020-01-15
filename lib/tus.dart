@@ -86,7 +86,7 @@ class Tus {
     return response;
   }
 
-  Future<dynamic> createUploadFromFile(String fileToUpload,
+  Future<Map<String, Object>> createUploadFromFile(String fileToUpload,
       {Map<String, String> metadata}) async {
     if(metadata == null) {
       metadata = Map<String,String>();
@@ -101,6 +101,11 @@ class Tus {
         "headers": headers,
         "metadata": metadata,
       });
+
+      if(result.containsKey("error")) {
+        throw Exception("${result["error"]} { ${result["reason"]}");
+      }
+
       return result;
     } catch (error) {
       throw error;

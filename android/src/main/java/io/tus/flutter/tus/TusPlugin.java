@@ -147,8 +147,6 @@ public class TusPlugin implements FlutterPlugin, MethodCallHandler {
                 e.printStackTrace(new PrintWriter(errors));
                 result.error("InterruptedException", e.getMessage(), errors.toString());
             }
-
-
         } else {
             result.notImplemented();
         }
@@ -178,7 +176,6 @@ class HandleFileUpload extends AsyncTask<Void, HashMap<String, String>, HashMap<
         this.metadata = metadata;
     }
 
-
     @Override
     protected HashMap<String, String> doInBackground(Void... voids) {
 
@@ -189,14 +186,12 @@ class HandleFileUpload extends AsyncTask<Void, HashMap<String, String>, HashMap<
             metadata.put("filename", file.getName());
             upload.setMetadata(metadata);
         } catch (FileNotFoundException e) {
-
             StringWriter errors = new StringWriter();
             e.printStackTrace(new PrintWriter(errors));
             final HashMap<String, String> a = new HashMap<>();
             a.put("error", e.getMessage());
             a.put("reason", errors.toString());
             return a;
-//            result.error("FileUploadUrlInvalid", e.getMessage(), errors.toString());
         }
 
         // We wrap our uploading code in the TusExecutor class which will automatically catch
@@ -273,7 +268,6 @@ class HandleFileUpload extends AsyncTask<Void, HashMap<String, String>, HashMap<
             });
 
             return errorMap;
-//            result.error("ProtocolException", e.getMessage(), errors.toString());
         } catch (IOException e) {
             final HashMap<String, String> errorMap = new HashMap<>();
             errorMap.put("endpointUrl", endpointUrl);
@@ -293,7 +287,6 @@ class HandleFileUpload extends AsyncTask<Void, HashMap<String, String>, HashMap<
 
             return errorMap;
 
-//            result.error("IOException", e.getMessage(), errors.toString());
         } catch (Exception e) {
             final HashMap<String, String> errorMap = new HashMap<>();
             errorMap.put("endpointUrl", endpointUrl);
@@ -311,7 +304,6 @@ class HandleFileUpload extends AsyncTask<Void, HashMap<String, String>, HashMap<
                 }
             });
             return errorMap;
-//            result.error("Exception", e.getMessage(), errors.toString());
         }
 
     }
