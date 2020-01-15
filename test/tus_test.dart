@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:tus/tus.dart';
 
 void main() {
-  const MethodChannel channel = MethodChannel('tus');
+  const MethodChannel channel = MethodChannel('io.tus.flutter_service');
 
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -20,4 +20,6 @@ void main() {
   test('getPlatformVersion', () async {
     expect(await Tus.platformVersion, '42');
   });
+
+  
 }

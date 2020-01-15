@@ -93,7 +93,7 @@ class Tus {
     return version;
   }
 
-  // Initialize the tus client on the native.
+  // Initialize the tus client on the native side.
   Future<Map> initializeWithEndpoint() async {
     var response =
         await _channel.invokeMethod("initWithEndpoint", <String, String>{
