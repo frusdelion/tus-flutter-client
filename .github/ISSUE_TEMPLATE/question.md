@@ -1,6 +1,6 @@
 ---
 name: Question
-about: Ask a general question about using tus-android-client
+about: Ask a general question about using tus-flutter-client
 title: ''
 labels: question
 assignees: ''
