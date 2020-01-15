@@ -6,7 +6,7 @@ A Flutter plugin to upload files using the [tus resumable upload protocol](https
 * [tus-android-client](https://github.com/tus/tus-android-client) on Android
 
 ## Pull Requests and Issues
-Pull requests are always welcome! If you are facing issues, please feel free 
+Pull requests are always welcome! 
 
 ## Installation
 Add the following to your `pubspec.yml`

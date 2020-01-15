@@ -21,5 +21,5 @@ void main() {
     expect(await Tus.platformVersion, '42');
   });
 
-  
+
 }
