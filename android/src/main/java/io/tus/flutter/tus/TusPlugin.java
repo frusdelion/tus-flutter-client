@@ -82,12 +82,7 @@ public class TusPlugin implements FlutterPlugin, MethodCallHandler {
             }
 
             TusClient tusClient = new TusClient();
-            tusClient.enableResuming(new TusPreferencesURLStore(sharedPreferences));
-            try {
-                tusClient.setUploadCreationURL(new URL(endpointUrl));
-            } catch (MalformedURLException e) {
-                result.error("InvalidURLProvided", e.getMessage(), e.getStackTrace());
-            }
+            tusClient.enableResuming(new TusPreferencesURLStore(sharedPreferences));             
             clients.put(endpointUrl, tusClient);
 
             HashMap<String, String> a = new HashMap<>();
@@ -203,8 +198,8 @@ class HandleFileUpload extends AsyncTask<Void, HashMap<String, String>, HashMap<
             protected void makeAttempt() throws ProtocolException, IOException {
                 // First try to resume an upload. If that's not possible we will create a new
                 // upload and get a TusUploader in return. This class is responsible for opening
-                // a connection to the remote server and doing the uploading.
-                final TusUploader uploader = client.resumeOrCreateUpload(upload);
+                // a connection to the remote server and doing the uploading.                  
+                final TusUploader uploader = client.beginOrResumeUploadFromURL(upload, new URL(endpointUrl));
 
                 // Upload the file as long as data is available. Once the
                 // file has been fully uploaded the method will return -1
