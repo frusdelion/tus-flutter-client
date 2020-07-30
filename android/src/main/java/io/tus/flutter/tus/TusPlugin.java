@@ -125,22 +125,14 @@ public class TusPlugin implements FlutterPlugin, MethodCallHandler {
 
             System.out.println("Starting upload");
 
-            HandleFileUpload b = new HandleFileUpload(client, fileUploadUrl, methodChannel, endpointUrl, metadata);
+            HandleFileUpload b = new HandleFileUpload(result, client, fileUploadUrl, methodChannel, endpointUrl, metadata);
             try {
-                HashMap<String, String> c = b.execute().get();
-                if (c.containsKey("error")) {
-                    result.error("ErrorFromExecution", c.get("error"), c.get("reason"));
-                } else {
-                    result.success(c);
-                }
-            } catch (ExecutionException e) {
+                b.execute();
+            }
+            catch (Exception e) {
                 StringWriter errors = new StringWriter();
                 e.printStackTrace(new PrintWriter(errors));
-                result.error("ExecutionException", e.getMessage(), errors.toString());
-            } catch (InterruptedException e) {
-                StringWriter errors = new StringWriter();
-                e.printStackTrace(new PrintWriter(errors));
-                result.error("InterruptedException", e.getMessage(), errors.toString());
+                result.error("Exception", e.getMessage(), errors.toString());
             }
         } else {
             result.notImplemented();
@@ -162,8 +154,10 @@ class HandleFileUpload extends AsyncTask<Void, HashMap<String, String>, HashMap<
     final MethodChannel methodChannel;
     final String endpointUrl;
     final HashMap<String, String> metadata;
+    final Result result;
 
-    HandleFileUpload(TusClient client, String uploadFileUrl, MethodChannel methodChannel, String endpointUrl, HashMap<String, String> metadata) {
+    HandleFileUpload(Result result, TusClient client, String uploadFileUrl, MethodChannel methodChannel, String endpointUrl, HashMap<String, String> metadata) {
+        this.result = result;
         this.client = client;
         this.uploadFileUrl = uploadFileUrl;
         this.methodChannel = methodChannel;
@@ -235,6 +229,7 @@ class HandleFileUpload extends AsyncTask<Void, HashMap<String, String>, HashMap<
                     public void run() {
                         // Call the desired channel message here.
                         methodChannel.invokeMethod("resultBlock", s);
+                        result.success(s);
                     }
                 });
             }
@@ -259,6 +254,7 @@ class HandleFileUpload extends AsyncTask<Void, HashMap<String, String>, HashMap<
                 public void run() {
                     // Call the desired channel message here.
                     methodChannel.invokeMethod("failureBlock", errorMap);
+                    result.error("ErrorFromExecution", errorMap.get("error"), errorMap.get("reason"));
                 }
             });
 
@@ -277,6 +273,7 @@ class HandleFileUpload extends AsyncTask<Void, HashMap<String, String>, HashMap<
                 public void run() {
                     // Call the desired channel message here.
                     methodChannel.invokeMethod("failureBlock", errorMap);
+                    result.error("ErrorFromExecution", errorMap.get("error"), errorMap.get("reason"));
                 }
             });
 
@@ -296,6 +293,7 @@ class HandleFileUpload extends AsyncTask<Void, HashMap<String, String>, HashMap<
                 public void run() {
                     // Call the desired channel message here.
                     methodChannel.invokeMethod("failureBlock", errorMap);
+                    result.error("ErrorFromExecution", errorMap.get("error"), errorMap.get("reason"));
                 }
             });
             return errorMap;
