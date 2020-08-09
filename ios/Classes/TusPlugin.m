@@ -127,7 +127,7 @@ static NSString* const FILE_NAME = @"tuskit_example";
                 [self.channel invokeMethod:@"failureBlock" arguments:a];
             };
 
-            [upload resume];
+            [upload uploadFile];
 
             NSMutableDictionary *inResult = [[NSMutableDictionary alloc]init];
             [inResult setValue:@"true" forKey:@"inProgress"];
